@@ -3,8 +3,10 @@
 
 from collections import defaultdict
 
-def makegraph(connectionList):
-    graph=defaultdict(list)
+def makegraph(node_cnt,connectionList):
+    graph=dict()
+    for i in range(node_cnt):
+        graph[i]=[]
     for conn in connectionList:
         graph[conn[1]].append(conn[0])
         if conn[0] not in graph:
@@ -34,8 +36,8 @@ def toposort(graph):
     return res[::-1]
 
 if __name__ == '__main__':
-    temp=[[1,0],[2,0],[3,1],[3,2]]
-
-    print(makegraph(temp))
-
-    print(toposort(makegraph(temp)))
+    temp=[[1,0],[2,0],[3,1],[3,2],[7,5],[5,4],[8,5]]
+    # 5 is the assumed no of nodes in graph
+    graph=makegraph(9,temp)
+    print(graph)
+    print(toposort(graph))
